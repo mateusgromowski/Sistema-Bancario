@@ -24,9 +24,9 @@ public class Users {
 			sc.nextLine();
 			if(id <= 0 || id > (name.size())) {
 				System.out.println("ID inválido.");
-			} else {	
+			} else {
+				id--;	
 				accountChoices(id);
-				System.out.print("Sua entrada: ");
 			}
 		}
 	}
@@ -41,8 +41,8 @@ public class Users {
 			if (id <= 0 || id > (name.size())) {
 				System.out.println("ID inválido.");
 			} else {
-				name.remove(id);
-				accounts.removeIndex(id);
+				name.remove(id - 1);
+				accounts.removeIndex(id - 1);
 				System.out.println("Usuário removido com sucesso.");
 			}
 		}
@@ -51,16 +51,17 @@ public class Users {
 
 	void accountChoices(int id) {
 		menus.selectMenu();
+		System.out.print("Sua entrada: ");
 		String choice = sc.nextLine();
 		switch(choice) {
 			case "1":
-				accounts.getMoney(id);
+				System.out.println(accounts.getMoney(id));
 				break;
 			case "2":
-				accounts.deposit();
+				accounts.deposit(id);
 				break;
 			case "3":
-				accounts.withdraw();
+				accounts.withdraw(id);
 				break;
 		}		
 	}

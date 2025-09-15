@@ -1,7 +1,7 @@
 ## Sistema Bancário Simples em Java
 
 ## Introdução e funcionalidades
-Um simples sistema bancário em Java. Registra, seleciona, deleta usuários (em desenvolvimento) e faz operações bancárias (depósito e saque [em desenvolvimento]).
+Um simples sistema bancário em Java. Registra, seleciona, deleta usuários e faz operações bancárias.
 
 ## Objetivos
 Estudo de conceitos em POO (principalmente encapsulamento) e diversão :)
