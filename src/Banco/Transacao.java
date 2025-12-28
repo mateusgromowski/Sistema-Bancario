@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transacao {
-    private Tipo tipoTransacao;
-    private double valor;
     private LocalDateTime diaEHora;
     private String horaFormatada;
-    private String numeroConta;
     private String diaFormatado;
+    private Tipo tipoTransacao;
+    private double valor;
+    private String numeroConta;
 
     public Transacao(Tipo tipoTransacao, double valor, String numeroConta) {
         this.tipoTransacao = tipoTransacao;

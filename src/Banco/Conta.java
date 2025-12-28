@@ -10,10 +10,10 @@ public class Conta {
         this.titular = titular;
         this.saldo = saldo;
         numeroInt++;
-        this.numero = numeroInt < 10 ? "00" + numeroInt : "0" + numeroInt;
+        this.numero = numeroInt < 10 ? "00" + numeroInt : numeroInt < 100 ? "0" + numeroInt : "" + numeroInt;
     }
 
-    public boolean depositar(double dinheiro) {
+    protected boolean depositar(double dinheiro) {
         if (dinheiro <= 0) {
             System.out.println("O valor de depósito não pode ser menor ou igual a zero.");
             return false;
@@ -22,7 +22,7 @@ public class Conta {
         return true;
     }
 
-    public boolean sacar(double dinheiro) {
+    protected boolean sacar(double dinheiro) {
         if (dinheiro <= 0) {
             System.out.println("O valor de saque não pode ser menor ou igual a zero.");
             return false;
