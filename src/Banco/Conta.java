@@ -1,4 +1,4 @@
-package Banco;
+package banco;
 
 public class Conta {
     private String titular;
