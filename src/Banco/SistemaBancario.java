@@ -7,54 +7,40 @@ public class SistemaBancario {
     private List<Transacao> transacoes = new ArrayList<>();
     private List<Conta> contas = new ArrayList<>();
 
-    public String encontraNumeroPorTitular(String titular) {
-        for (Conta conta : contas) {
-            if (titular.equals(conta.getTitular())) {
-                return conta.getNumero();
-            }
-        }
-        return null;
-    }
-
-    public boolean criarConta(String titular, double saldo) {
+    public Conta criarConta(String titular, double saldo) {
         if (saldo <= 0) {
-            System.out.println("O saldo não pode ser menor ou igual a zero.");
-            return false;
+            return null;
         }
-        contas.add(new Conta(titular, saldo));
-        return true;
+        Conta conta = new Conta(titular, saldo);
+        contas.add(conta);
+        return conta;
     }
 
-    public void depositar(String numero, double dinheiro) {
+    public boolean depositar(String numero, double dinheiro) {
         for (Conta conta : contas) {
             if (conta.getNumero().equals(numero)) {
                 if (conta.depositar(dinheiro)) {
                     addTransacao(Tipo.DEPOSITO, dinheiro, numero);
                 }
-                return;
+                return true;
             }
         }
-        System.out.println("Conta não encontrada.");
+        return false;
     }
 
-    public void sacar(String numero, double dinheiro) {
+    public boolean sacar(String numero, double dinheiro) {
         for (Conta conta : contas) {
             if (conta.getNumero().equals(numero)) {
                 if (conta.sacar(dinheiro)) {
                     addTransacao(Tipo.SAQUE, dinheiro, numero);
                 }
-                return;
+                return true;
             }
         }
-        System.out.println("Conta não encontrada.");
+        return false;
     }
 
     private void addTransacao(Tipo tipo, double dinheiro, String numero) {
         transacoes.add(new Transacao(tipo, dinheiro, numero));
     }
-
-    public List<Conta> getContas() {
-        return this.contas;
-    }
-
 }

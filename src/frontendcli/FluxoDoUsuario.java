@@ -1,6 +1,5 @@
 package frontendcli;
 
-import java.util.List;
 import java.util.Scanner;
 
 import banco.SistemaBancario;
@@ -15,7 +14,7 @@ public class FluxoDoUsuario {
     }
 
     public void menuPrincipal() {
-        outerLoop: while (true) {
+        while (true) {
             Menus.menuPrincipal();
             try {
                 int escolha = input.nextInt();
@@ -56,9 +55,10 @@ public class FluxoDoUsuario {
             double saldo = input.nextDouble();
             input.nextLine();
             System.out.println();
-            if (banco.criarConta(titular, saldo)) {
+            Conta novaConta = banco.criarConta(titular, saldo);
+            if (novaConta != null) {
                 System.out.println("Conta criada com sucesso.");
-                String numeroConta = banco.encontraNumeroPorTitular(titular);
+                String numeroConta = novaConta.getNumero();
                 System.out.println("Número da conta: " + numeroConta);
                 System.out.println();
                 System.out.println("Pressione ENTER para continuar...");

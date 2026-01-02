@@ -15,7 +15,6 @@ public class Conta {
 
     protected boolean depositar(double dinheiro) {
         if (dinheiro <= 0) {
-            System.out.println("O valor de depósito não pode ser menor ou igual a zero.");
             return false;
         }
         this.saldo += dinheiro;
@@ -24,12 +23,10 @@ public class Conta {
 
     protected boolean sacar(double dinheiro) {
         if (dinheiro <= 0) {
-            System.out.println("O valor de saque não pode ser menor ou igual a zero.");
             return false;
         }
 
         if (dinheiro > this.saldo) {
-            System.out.println("O valor de saque não pode ser maior que o saldo.");
             return false;
         }
         this.saldo -= dinheiro;
