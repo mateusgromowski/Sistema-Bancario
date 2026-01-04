@@ -13,7 +13,7 @@ public class Conta {
         this.numero = numeroInt < 10 ? "00" + numeroInt : numeroInt < 100 ? "0" + numeroInt : "" + numeroInt;
     }
 
-    protected boolean depositar(double dinheiro) {
+    public boolean depositar(double dinheiro) {
         if (dinheiro <= 0) {
             return false;
         }
@@ -21,7 +21,7 @@ public class Conta {
         return true;
     }
 
-    protected boolean sacar(double dinheiro) {
+    public boolean sacar(double dinheiro) {
         if (dinheiro <= 0) {
             return false;
         }

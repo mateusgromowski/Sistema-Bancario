@@ -23,7 +23,10 @@ public class FluxoDoUsuario {
                     System.out.println("Entrada inválida.");
                     continue;
                 }
-                tratamentoDeEscolhas(escolha);
+                if (escolha == 0) {
+                    break;
+                }
+                tratamentoDeEscolhasDoMenuPrincipal(escolha);
             } catch (Exception e) {
                 System.out.println("Entrada inválida.");
                 input.nextLine();
@@ -32,13 +35,13 @@ public class FluxoDoUsuario {
         }
     }
 
-    public void tratamentoDeEscolhas(int escolha) {
+    private void tratamentoDeEscolhasDoMenuPrincipal(int escolha) {
         switch (escolha) {
             case 1:
                 criacaoDeConta();
                 break;
-            case 0:
-                System.exit(0);
+            case 2:
+                acessarConta();
                 break;
             default:
                 System.out.println("Entrada inválida.");
@@ -69,5 +72,81 @@ public class FluxoDoUsuario {
         } catch (Exception e) {
             System.out.println("Entrada inválida.");
         }
+    }
+
+    private void acessarConta() {
+        System.out.println();
+        System.out.println("--- ACESSO À CONTA ---");
+        System.out.print("Digite o número da conta: ");
+        String numero = input.nextLine();
+        Conta conta = banco.procurarConta(numero);
+        if (conta == null) {
+            System.out.println("Conta não encontrada");
+            System.out.println("Verifique o número e tente novamente.");
+            return;
+        }
+        menuDaConta(conta);
+    }
+
+    private void menuDaConta(Conta conta) {
+        while (true) {
+            System.out.println("------------------------------------");
+            System.out.printf("Conta: %s | Titular: %s\n", conta.getNumero(), conta.getTitular());
+            System.out.printf("Saldo: R$ %.2f\n", conta.getSaldo());
+            System.out.println();
+            System.out.println("1 - Depositar");
+            System.out.println("2 - Sacar");
+            System.out.println("3 - Ver Extrato");
+            System.out.println("0 - Voltar ao menu principal");
+            System.out.println();
+            System.out.print("Escolha uma opção: ");
+            try {
+                int escolha = input.nextInt();
+                input.nextLine();
+                if (escolha > 3 || escolha < 0) {
+                    System.out.println("Entrada inválida.");
+                    continue;
+                }
+                if (escolha == 0) {
+                    break;
+                }
+                tratamentoDeEscolhasDaConta(escolha, conta);
+            } catch (Exception e) {
+                System.out.println("Entrada Incorreta.");
+                input.nextLine();
+            }
+        }
+    }
+
+    private void tratamentoDeEscolhasDaConta(int escolha, Conta conta) {
+        switch (escolha) {
+            case 1:
+                menuDeposito(conta);
+                break;
+        }
+    }
+
+    private void menuDeposito(Conta conta) {
+        System.out.println("--- DEPÓSITO ---");
+        System.out.println();
+        System.out.print("Valor do depósito: ");
+        try {
+            double valor = input.nextDouble();
+            input.nextLine();
+            if (banco.depositar(conta.getNumero(), valor)) {
+                System.out.println("Depósito realizado com sucesso!");
+                System.out.printf("Novo saldo R$ %.2f\n", conta.getSaldo());
+            } else {
+                System.out.println("Valor inválido.");
+                System.out.println("Depósito deve ser maior do que zero.");
+            }
+            System.out.println("Aperte ENTER para continuar...");
+            input.nextLine();
+
+        } catch (Exception e) {
+            System.out.println("Entrada inválida.");
+            input.nextLine();
+        }
+
     }
 }

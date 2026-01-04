@@ -21,8 +21,8 @@ public class SistemaBancario {
             if (conta.getNumero().equals(numero)) {
                 if (conta.depositar(dinheiro)) {
                     addTransacao(Tipo.DEPOSITO, dinheiro, numero);
+                    return true;
                 }
-                return true;
             }
         }
         return false;
@@ -42,5 +42,14 @@ public class SistemaBancario {
 
     private void addTransacao(Tipo tipo, double dinheiro, String numero) {
         transacoes.add(new Transacao(tipo, dinheiro, numero));
+    }
+
+    public Conta procurarConta(String numero) {
+        for (Conta conta : contas) {
+            if (numero.equals(conta.getNumero())) {
+                return conta;
+            }
+        }
+        return null;
     }
 }
