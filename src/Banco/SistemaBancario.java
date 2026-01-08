@@ -33,8 +33,8 @@ public class SistemaBancario {
             if (conta.getNumero().equals(numero)) {
                 if (conta.sacar(dinheiro)) {
                     addTransacao(Tipo.SAQUE, dinheiro, numero);
+                    return true;
                 }
-                return true;
             }
         }
         return false;
@@ -60,10 +60,6 @@ public class SistemaBancario {
                 transacoesConta.add(transacao);
             }
         }
-        if (transacoesConta.size() == 0) {
-            return null;
-        }
-
         return transacoesConta;
     }
 

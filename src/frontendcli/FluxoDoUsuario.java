@@ -140,7 +140,7 @@ public class FluxoDoUsuario {
         System.out.println("Conta: " + conta.getNumero() + " - " + conta.getTitular());
         System.out.println();
         List<Transacao> transacoesDoUsuario = banco.getTransacoesDaConta(conta);
-        if (transacoesDoUsuario == null) {
+        if (transacoesDoUsuario.isEmpty()) {
             System.out.println("Essa conta ainda não fez nenhuma transação.");
             return;
         }
@@ -166,7 +166,7 @@ public class FluxoDoUsuario {
                 System.out.printf("Novo saldo: R$ %.2f\n", conta.getSaldo());
             } else {
                 System.out.println("Valor inválido.");
-                System.out.println("Depósito deve ser maior do que zero.");
+                System.out.println("Saque deve ser maior do que zero e menor ou igual ao saldo.");
             }
             System.out.println("Aperte ENTER para continuar...");
             input.nextLine();
