@@ -123,6 +123,31 @@ public class FluxoDoUsuario {
             case 1:
                 menuDeposito(conta);
                 break;
+            case 2:
+                menuSaque(conta);
+                break;
+        }
+    }
+
+    private void menuSaque(Conta conta) {
+        System.out.println("--- SAQUE ---");
+        System.out.println();
+        System.out.print("Valor do saque: ");
+        try {
+            double valorDoSaque = input.nextDouble();
+            input.nextLine();
+            if (banco.sacar(conta.getNumero(), valorDoSaque)) {
+                System.out.println("Saque realizado com sucesso!");
+                System.out.printf("Novo saldo: R$ %.2f", conta.getSaldo());
+            } else {
+                System.out.println("Valor inválido.");
+                System.out.println("Depósito deve ser maior do que zero.");
+            }
+            System.out.println("Aperte ENTER para continuar...");
+            input.nextLine();
+        } catch (Exception e) {
+            System.out.println("Entrada inválida.");
+            input.nextLine();
         }
     }
 
