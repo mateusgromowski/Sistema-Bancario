@@ -52,4 +52,23 @@ public class SistemaBancario {
         }
         return null;
     }
+
+    public List<Transacao> getTransacoesDaConta(Conta conta) {
+        List<Transacao> transacoesConta = new ArrayList<>();
+        for (Transacao transacao : transacoes) {
+            if (transacao.getNumeroConta().equals(conta.getNumero())) {
+                transacoesConta.add(transacao);
+            }
+        }
+        if (transacoesConta.size() == 0) {
+            return null;
+        }
+
+        return transacoesConta;
+    }
+
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
 }

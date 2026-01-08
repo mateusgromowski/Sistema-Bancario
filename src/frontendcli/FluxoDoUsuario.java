@@ -1,8 +1,11 @@
 package frontendcli;
 
+import java.util.List;
 import java.util.Scanner;
 
 import banco.SistemaBancario;
+import banco.Tipo;
+import banco.Transacao;
 import banco.Conta;
 
 public class FluxoDoUsuario {
@@ -126,7 +129,29 @@ public class FluxoDoUsuario {
             case 2:
                 menuSaque(conta);
                 break;
+            case 3:
+                getExtrato(conta);
+                break;
         }
+    }
+
+    private void getExtrato(Conta conta) {
+        System.out.println("========== EXTRATO ==========");
+        System.out.println("Conta: " + conta.getNumero() + " - " + conta.getTitular());
+        System.out.println();
+        List<Transacao> transacoesDoUsuario = banco.getTransacoesDaConta(conta);
+        if (transacoesDoUsuario == null) {
+            System.out.println("Essa conta ainda não fez nenhuma transação.");
+            return;
+        }
+
+        for (Transacao transacao : transacoesDoUsuario) {
+            System.out.println("[" + transacao.getDiaFormatado() + " " + transacao.getHoraFormatada() + "] " +
+                    transacao.getTipoTransacao() +
+                    (transacao.getTipoTransacao().equals(Tipo.DEPOSITO) ? " +" + transacao.getValor()
+                            : "    -" + transacao.getValor()));
+        }
+        System.out.printf("Saldo atual: R$ %.2f\n", conta.getSaldo());
     }
 
     private void menuSaque(Conta conta) {
@@ -138,7 +163,7 @@ public class FluxoDoUsuario {
             input.nextLine();
             if (banco.sacar(conta.getNumero(), valorDoSaque)) {
                 System.out.println("Saque realizado com sucesso!");
-                System.out.printf("Novo saldo: R$ %.2f", conta.getSaldo());
+                System.out.printf("Novo saldo: R$ %.2f\n", conta.getSaldo());
             } else {
                 System.out.println("Valor inválido.");
                 System.out.println("Depósito deve ser maior do que zero.");
