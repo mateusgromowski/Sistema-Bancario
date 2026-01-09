@@ -1,5 +1,6 @@
 package frontendcli;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class FluxoDoUsuario {
                     break;
                 }
                 tratamentoDeEscolhasDoMenuPrincipal(escolha);
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida.");
                 input.nextLine();
                 continue;
@@ -72,7 +73,7 @@ public class FluxoDoUsuario {
                 return;
             }
             System.out.println("A conta não pôde ser criada.");
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Entrada inválida.");
         }
     }
@@ -114,7 +115,7 @@ public class FluxoDoUsuario {
                     break;
                 }
                 tratamentoDeEscolhasDaConta(escolha, conta);
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Entrada Incorreta.");
                 input.nextLine();
             }
@@ -170,7 +171,7 @@ public class FluxoDoUsuario {
             }
             System.out.println("Aperte ENTER para continuar...");
             input.nextLine();
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Entrada inválida.");
             input.nextLine();
         }
@@ -193,7 +194,7 @@ public class FluxoDoUsuario {
             System.out.println("Aperte ENTER para continuar...");
             input.nextLine();
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Entrada inválida.");
             input.nextLine();
         }
