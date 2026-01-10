@@ -23,7 +23,7 @@ public class FluxoDoUsuario {
             try {
                 int escolha = input.nextInt();
                 input.nextLine();
-                if (escolha > 3 || escolha < 0) {
+                if (escolha > 2 || escolha < 0) {
                     System.out.println("Entrada inválida.");
                     continue;
                 }
@@ -140,7 +140,7 @@ public class FluxoDoUsuario {
         System.out.println("========== EXTRATO ==========");
         System.out.println("Conta: " + conta.getNumero() + " - " + conta.getTitular());
         System.out.println();
-        List<Transacao> transacoesDoUsuario = banco.getTransacoesDaConta(conta);
+        List<Transacao> transacoesDoUsuario = conta.getTransacoes();
         if (transacoesDoUsuario.isEmpty()) {
             System.out.println("Essa conta ainda não fez nenhuma transação.");
             return;
